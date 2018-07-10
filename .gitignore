@@ -1,0 +1,7 @@
+*.csv
+*.json
+csvs/
+scrapy.cfg
+project.egg-info/
+notebooks/
+data/
