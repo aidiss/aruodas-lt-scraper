@@ -28,7 +28,7 @@ class CrawlerSpider(CrawlSpider):
     )
 
 
-    def parse_item(self, response: scrapy.http.Response):
+    def parse_item(self, response):
         i = {}
 
         i['href'] = response.url
