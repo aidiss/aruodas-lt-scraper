@@ -27,12 +27,10 @@ class CrawlerSpider(CrawlSpider):
             follow=True),
     )
 
-
     def parse_item(self, response):
         i = {}
 
         i['href'] = response.url
-
 
         r = response.css('dl.obj-details ::text').extract()
         [x.strip() for x in r]
@@ -42,17 +40,21 @@ class CrawlerSpider(CrawlSpider):
         r = dict(r)
         i['info'] = r
 
-        i['comment'] = response.xpath('//p[@class="obj-comment"]//text()').extract()
+        i['comment'] = response.xpath(
+            '//p[@class="obj-comment"]//text()').extract()
 
-        i['atstumai'] = response.xpath('//div[@class="statistic-info-row"]/*//text()').extract()
+        i['atstumai'] = response.xpath(
+            '//div[@class="statistic-info-row"]/*//text()').extract()
 
-        i['summary'] = response.xpath('//*[@class="obj-summary"]/b/text()').extract()
+        i['summary'] = response.xpath(
+            '//*[@class="obj-summary"]/b/text()').extract()
 
         informacija = response.css('div.obj-info-bg div dl *::text').extract()
         informacija = informacija[1::2]
         informacija = dict(zip(informacija[0::2], informacija[1::2]))
         i['informacija'] = informacija
 
-        i['phone'] = response.css('div.phone.small::text').extract_first().strip()
+        i['phone'] = response.css(
+            'div.phone.small::text').extract_first().strip()
 
         return i
